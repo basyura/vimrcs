@@ -124,7 +124,7 @@ inoremap <expr><C-p> pumvisible() ? "\<C-p>" : "\<C-p>\<C-n>"
 inoremap <expr><CR> pumvisible() ? "\<C-y>\<CR>X\<BS>" : "\<CR>X\<BS>"
 "
 inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
-map <silent> <ESC> <ESC>:set iminsert=0<CR>
+"map <silent> <ESC> <ESC>:set iminsert=0<CR>
 " snippet 補完
 imap <silent> <C-l> <Plug>(neocomplcache_snippets_expand)
 smap <silent> <C-l> <Plug>(neocomplcache_snippets_expand)
