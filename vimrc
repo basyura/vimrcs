@@ -138,6 +138,6 @@ let g:hatena_user = 'basyura'
 " vimwiki
 let g:vimwiki_list = [{'path':'~/dropbox/vimwiki/text/', 'path_html':'~/dropbox/vimwiki/html/'}]
 " mru.vim
-let MRU_Exclude_Files = '^/tmp/.*\|^/var/tmp/.*\|^/private/var'
+let MRU_Exclude_Files = '^/tmp/.*\|^/var/tmp/.*\|^/private/var\|COMMIT_EDITMSG'
 let MRU_Max_Entries   = 20
 let MRU_Window_Height = 21
