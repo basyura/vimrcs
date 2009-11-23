@@ -70,8 +70,8 @@ hi Cursor	  guifg=bg	guibg=orange
 """"""""""""""""""""""""""""""""""
 map <silent> <S-u> :redo<CR>
 map bn    :bnext<CR>
-map <C-f> :bnext<CR>
-map <C-b> :bprevious<CR>
+map <silent> <C-f> :bnext<CR>
+map <silent> <C-b> :bprevious<CR>
 "ウインドウのフォーカス移動
 map  wh <C-w>h
 map  wl <C-w>l
