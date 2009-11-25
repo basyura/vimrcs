@@ -17,7 +17,7 @@ set autoindent
 set vb t_vb=
 set iminsert=0
 set titlestring=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}
-set laststatus=1
+set laststatus=0
 set linespace=4
 set antialias
 "set nobackup
