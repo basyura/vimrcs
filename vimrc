@@ -72,6 +72,8 @@ map <silent> <S-u> :redo<CR>
 map bn    :bnext<CR>
 map <silent> <C-f> :bnext<CR>
 map <silent> <C-b> :bprevious<CR>
+imap <silent> <C-f> <ESC>:bnext<CR>
+imap <silent> <C-b> <ESC>:bprevious<CR>
 "ウインドウのフォーカス移動
 map  wh <C-w>h
 map  wl <C-w>l
@@ -95,6 +97,7 @@ map  <C-a> ggvG$
 map  <C-v> "+gP
 " バッファリストを表示
 map <silent> <F3> :call BufferList()<CR>
+map <silent> <C-l> <ESC>:call BufferList()<CR>
 " 編集履歴を表示
 map <C-r> :MRU<CR>
 " gvim で q → bd をしてる用
