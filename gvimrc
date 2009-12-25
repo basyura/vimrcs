@@ -46,4 +46,5 @@ AlterCommand wq WQ
 """"""""""""""""""""""""""""""""""
 "             other              "
 """"""""""""""""""""""""""""""""""
+hi Cursor	  guifg=bg	guibg=orange
 
