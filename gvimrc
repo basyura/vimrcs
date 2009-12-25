@@ -51,3 +51,5 @@ AlterCommand wq WQ
 if has('mac')
   map <silent> <ESC> <ESC>:set iminsert=0<CR>
 endif
+" カーソルオレンジ"
+hi Cursor	  guifg=bg	guibg=orange
