@@ -46,4 +46,8 @@ AlterCommand wq WQ
 """"""""""""""""""""""""""""""""""
 "             other              "
 """"""""""""""""""""""""""""""""""
-
+" esc 連打すれば ime  off にしちゃう
+" terminal だと git のコミットに失敗した気がするのでこちらに
+if has('mac')
+  map <silent> <ESC> <ESC>:set iminsert=0<CR>
+endif
