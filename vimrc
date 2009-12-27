@@ -14,7 +14,6 @@ let mapleader = "m"
 set ambiwidth=double
 set nu
 set autoindent
-set vb t_vb=
 set iminsert=0
 set titlestring=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}
 set laststatus=0
@@ -27,6 +26,11 @@ set directory=~/.vim/swp
 set ts=4 sw=4 sts=0
 set scrolloff=5
 set wrap
+
+" ubuntu だと画面がちらつく。mac だと音が出ちゃう。
+if has('mac')
+  set vb t_vb=
+endif
 
 if has('gui')
   " コマンドラインの高さ(GUI使用時)
