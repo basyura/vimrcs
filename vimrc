@@ -149,6 +149,11 @@ let MRU_Exclude_Files = '^/tmp/.*\|^/var/tmp/.*\|^/private/var\|COMMIT_EDITMSG'
 let MRU_Max_Entries   = 20
 let MRU_Window_Height = 21
 let MRU_Add_Menu = 0
+" taglist
+map <C-e> :Tlist<CR>
+let g:Tlist_GainFocus_On_ToggleOpen = 1
+let g:Tlist_Show_One_File = 1
+let Tlist_Close_On_Select = 1
 
 if !has('mac')
 	inoremap <silent> <esc> <esc>:call ForceImeOff()<cr>
