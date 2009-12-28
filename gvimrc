@@ -5,7 +5,10 @@ colorscheme koehler
 """"""""""""""""""""""""""""""""""
 "           settings             "
 """"""""""""""""""""""""""""""""""
-if has('mac')
+if has('windows')
+  set guifont=MeiryoKe_Gothic:h11:cSHIFTJIS
+  set linespace=5
+elseif has('mac')
   " フォント
   set guifont=Monaco:h12
   " ウインドウ幅
@@ -28,6 +31,8 @@ elseif has('unix')
   " 高さ
   set lines=28
 endif
+
+
 "*******************************************************
 "*                   保存・終了                        *
 "*******************************************************

@@ -154,8 +154,8 @@ map <C-e> :Tlist<CR>
 let g:Tlist_GainFocus_On_ToggleOpen = 1
 let g:Tlist_Show_One_File = 1
 let Tlist_Close_On_Select = 1
-
-if !has('mac')
+" ubuntu の時だけ
+if !has('mac') && !has('windows')
 	inoremap <silent> <esc> <esc>:call ForceImeOff()<cr>
 	inoremap <silent> <C-[> <esc>:call ForceImeOff()<cr>
 	inoremap <silent> <C-c> <esc>:call ForceImeOff()<cr>
@@ -163,4 +163,3 @@ if !has('mac')
 		let imeoff = system('xvkbd -text "\[Control]\[Shift]\[space]" > /dev/null 2>&1')
 	endfunction
 endif
-	
