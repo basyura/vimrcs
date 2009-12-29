@@ -26,6 +26,7 @@ set directory=~/.vim/swp
 set ts=4 sw=4 sts=0
 set scrolloff=5
 set wrap
+set hlsearch
 
 " ubuntu だと画面がちらつく。mac だと音が出ちゃう。
 if has('mac')
