@@ -5,7 +5,7 @@ colorscheme koehler
 """"""""""""""""""""""""""""""""""
 "           settings             "
 """"""""""""""""""""""""""""""""""
-if has('windows')
+if has('windows') && !has('unix')
   set guifont=MeiryoKe_Gothic:h11:cSHIFTJIS
   set linespace=5
 elseif has('mac')
@@ -25,9 +25,9 @@ elseif has('unix')
   " アンチエイリアス
   set antialias
   " フォント
-  set guifont=MeiryoKe_Gothic\ 11
+  set guifont=MeiryoKe_Gothic\ 11.5
   " 幅
-  set columns=75
+  set columns=100
   " 高さ
   set lines=28
 endif
