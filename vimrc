@@ -26,6 +26,7 @@ set directory=~/.vim/swp
 set ts=4 sw=4 sts=0
 set scrolloff=5
 set wrap
+set hlsearch
 
 " ubuntu だと画面がちらつく。mac だと音が出ちゃう。
 if has('mac')
@@ -154,8 +155,8 @@ map <C-e> :Tlist<CR>
 let g:Tlist_GainFocus_On_ToggleOpen = 1
 let g:Tlist_Show_One_File = 1
 let Tlist_Close_On_Select = 1
-
-if !has('mac')
+" ubuntu の時だけ
+if !has('mac') && !has('win32')
 	inoremap <silent> <esc> <esc>:call ForceImeOff()<cr>
 	inoremap <silent> <C-[> <esc>:call ForceImeOff()<cr>
 	inoremap <silent> <C-c> <esc>:call ForceImeOff()<cr>
