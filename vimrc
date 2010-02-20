@@ -147,7 +147,7 @@ let g:hatena_user = 'basyura'
 let g:vimwiki_list = [{'path':'~/dropbox/vimwiki/text/', 'path_html':'~/dropbox/vimwiki/html/'}]
 " mru.vim
 let MRU_Exclude_Files = '^/tmp/.*\|^/var/tmp/.*\|^/private/var\|COMMIT_EDITMSG'
-let MRU_Max_Entries   = 20
+let MRU_Max_Entries   = 50
 let MRU_Window_Height = 21
 let MRU_Add_Menu = 0
 " taglist
