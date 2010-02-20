@@ -103,8 +103,6 @@ map  <C-v> "+gP
 " バッファリストを表示
 map <silent> <F3> :call BufferList()<CR>
 map <silent> <C-l> <ESC>:call BufferList()<CR>
-" 編集履歴を表示
-map <C-r> :MRU<CR>
 " gvim で q → bd をしてる用
 map <C-q><C-q><C-q> ZQ
 
@@ -180,3 +178,15 @@ endfunction
 
 " Change current directory.
 nnoremap <silent> <Space>cd :<C-u>CD<CR>
+"fuf
+"let g:fuf_keyOpen = ":"
+map <silent> <C-n> :FufBuffer<CR>
+" 編集履歴を表示
+map <C-r> :FufMruFile<CR>
+map <Leader>b :FufBookmark<CR>
+let g:fuf_modesDisable = ['mrucmd']
+"map <silent> <C-f> <C-n><C-e>
+let g:fuf_mrufile_exclude = '\v\~$|\.bak$|\.swp|\.howm$'
+let g:fuf_mrufile_maxItem = 10000
+let g:fuf_enumeratingLimit = 20
+
