@@ -176,17 +176,36 @@ function! s:ChangeCurrentDir(directory, bang)
     endif
 endfunction
 
+" for rails.vim
+map <silent> <Leader>r :<C-u>R<CR>
+
+
 " Change current directory.
 nnoremap <silent> <Space>cd :<C-u>CD<CR>
 "fuf
 "let g:fuf_keyOpen = ":"
 map <silent> <C-n> :FufBuffer<CR>
+map <silent> <Leader>d :FufFile<CR>
 " 編集履歴を表示
 map <C-r> :FufMruFile<CR>
 map <Leader>b :FufBookmark<CR>
 let g:fuf_modesDisable = ['mrucmd']
+let g:fuf_maxMenuWidth = 100
 "map <silent> <C-f> <C-n><C-e>
-let g:fuf_mrufile_exclude = '\v\~$|\.bak$|\.swp|\.howm$'
-let g:fuf_mrufile_maxItem = 10000
-let g:fuf_enumeratingLimit = 20
+"let g:fuf_mrufile_exclude = '\v\~$|\.bak$|\.swp|/private/var/*|/private/tmp/*|COMMIT_EDITMSG|Downloads/*|\.DS_Store'
+"let g:fuf_mrufile_maxItem = 10000
+"let g:fuf_enumeratingLimit = 20
 
+
+"neoui
+"map <silent> <C-n> :NeoUI buffer<CR>
+"map <silent> <Leader>d :NeoUI file<CR>
+"map <C-r> :NeoUI file/mru<CR>
+"let g:neoui_file_mru_time_format="%H:%M"
+
+nnoremap <Space>po   :<C-u>PosttoTwitter<Enter>
+nnoremap <Space>fr   :<C-u>FriendsTwitter<Enter>
+nnoremap <Space>re   :<C-u>RepliesTwitter<Enter>
+
+let twitvim_browser_cmd = "open -a firefox "
+"let twitvim_enable_ruby = 1
