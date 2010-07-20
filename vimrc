@@ -1,11 +1,12 @@
 """"""""""""""""""""""""""""""""""
 "         core settings          "
 """"""""""""""""""""""""""""""""""
-filetype plugin indent on
-syntax enable
-colorscheme koehler
-
-set runtimepath+=~/.vim/plugins/*
+if expand("%") != ".git/COMMIT_EDITMSG"
+	filetype plugin indent on
+	syntax enable
+	colorscheme koehler
+	set runtimepath+=~/.vim/plugins/*
+endif
 
 let mapleader = "m"
 
