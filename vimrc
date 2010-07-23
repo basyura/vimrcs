@@ -116,7 +116,7 @@ cmap <C-v> <C-R>+
 "挿入モードで Ctl + v で貼り付ける
 imap <C-v> <C-R>+
 "全て選択
-map  <C-a> ggvG$
+map  <C-a><C-a> ggvG$
 "貼り付け
 map  <C-v> "+gP
 " バッファリストを表示
@@ -125,8 +125,18 @@ map <silent> <C-l> <ESC>:call BufferList()<CR>
 " gvim で q → bd をしてる用
 map <C-q><C-q><C-q> ZQ
 
-"imap <C-e> <End>
+cmap <C-e> <End>
+cmap <C-a> <HOME>
+cmap <C-f> <Right>
+cmap <C-b> <Left>
+imap <C-e> <End>
 imap <C-a> <HOME>
+imap <C-f> <Right>
+imap <C-b> <Left>
+nnoremap <C-e> <End>
+nnoremap <C-a> <HOME>
+"map <C-e> :Tlist<CR>
+vmap <C-b> :Batch<CR>
 "}}}
 
 " neocomplcache {{{
@@ -173,7 +183,7 @@ inoremap <expr><C-p> pumvisible() ? "\<C-p>" : "\<C-p>\<C-n>"
 " 補完候補が出ていたら確定、なければ改行
 inoremap <expr><CR>  pumvisible() ? neocomplcache#close_popup() : "<CR>"
 " 補完をキャンセル
-inoremap <expr><C-e>  neocomplcache#cancel_popup()
+inoremap <expr><C-c>  neocomplcache#cancel_popup()
 " 補完をアンドゥ
 inoremap <expr><C-u>  neocomplcache#undo_completion()
 
@@ -203,7 +213,6 @@ let MRU_Max_Entries   = 50
 let MRU_Window_Height = 21
 let MRU_Add_Menu = 0
 " taglist
-map <C-e> :Tlist<CR>
 let g:Tlist_GainFocus_On_ToggleOpen = 1
 let g:Tlist_Show_One_File = 1
 let Tlist_Close_On_Select = 1
