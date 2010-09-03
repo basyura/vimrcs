@@ -1,7 +1,8 @@
 """"""""""""""""""""""""""""""""""
 "         core settings          "
 """"""""""""""""""""""""""""""""""
-colorscheme koehler
+"colorscheme koehler
+colorscheme wombat
 """"""""""""""""""""""""""""""""""
 "           settings             "
 """"""""""""""""""""""""""""""""""
@@ -12,11 +13,13 @@ elseif has('mac')
   " フォント
   set guifont=Monaco:h11.5
   " ウインドウ幅
-  set columns=95
+  if &columns == 80
+    set columns=95
+ endif
   " ウインドウの高さ
-  set lines=40
+  set lines=41
   " 透明度
-  set transparency=10 
+  set transparency=7
   " esc 時に ime off mac vim only
   set imda
   "
@@ -34,6 +37,7 @@ elseif has('unix')
 endif
 
 set guioptions-=rL
+set laststatus=0
 
 
 "*******************************************************
@@ -62,11 +66,12 @@ if has('mac')
 endif
 " カーソルオレンジ"
 hi Cursor	  guifg=bg	guibg=orange
+hi Visual		guifg=black guibg=#bde682
 " ポップアップの選択中
-hi PmenuSel guibg=magenta guifg=white
-hi Pmenu guibg=white guifg=black
-hi Folded guifg=blue
+"hi PmenuSel guibg=magenta guifg=white
+"hi Pmenu guibg=white guifg=black
 
-autocmd FileType vimwiki :hi Comment guifg=#ffffff
-autocmd FileType vimwiki :hi PreProc guifg=#ffffff
-autocmd FileType vimwiki :hi Special guifg=#ffffff
+"autocmd FileType vimwiki :hi Folded  guifg=#ffffff
+"autocmd FileType vimwiki :hi Comment guifg=#ffffff
+"autocmd FileType vimwiki :hi PreProc guifg=#ffffff
+"autocmd FileType vimwiki :hi Special guifg=#ffffff

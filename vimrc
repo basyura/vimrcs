@@ -10,12 +10,14 @@ endif
 
 let mapleader = "m"
 
-" settings {{{
-
 """"""""""""""""""""""""""""""""""
 "           settings             "
 """"""""""""""""""""""""""""""""""
-source ~/.vimrc_pass
+
+if filereadable('~/.vimrc_secret')
+  source ~/.vimrc_secret
+endif
+
 set ambiwidth=double
 set nu
 set autoindent
@@ -33,6 +35,7 @@ set scrolloff=5
 set wrap
 set hlsearch
 set smartindent
+set timeout timeoutlen=300 ttimeoutlen=100
 
 " ubuntu だと画面がちらつく。mac だと音が出ちゃう。
 if has('mac')
@@ -50,9 +53,9 @@ if has('gui')
   set guioptions-=T
 endif
 
-"}}}
-
-" auto command {{{
+set tabstop=2
+set shiftwidth=2
+set expandtab
 
 """"""""""""""""""""""""""""""""""
 "         auto command           "
@@ -73,19 +76,27 @@ autocmd FileType eruby :setlocal expandtab
 autocmd FileType scala :setlocal tabstop=2
 autocmd FileType scala :setlocal shiftwidth=2
 autocmd FileType scala :setlocal expandtab
+" for vim
+autocmd FileType scala :setlocal tabstop=4
+autocmd FileType scala :setlocal shiftwidth=4
+autocmd FileType scala :setlocal noexpandtab
+" for java
+autocmd FileType java :setlocal tabstop=4
+autocmd FileType java :setlocal shiftwidth=4
+autocmd FileType java :setlocal noexpandtab
+" for javascript
+autocmd FileType javascript :setlocal tabstop=2
+autocmd FileType javascript :setlocal shiftwidth=2
+autocmd FileType javascript :setlocal expandtab
 
-"}}}
+autocmd FileType netrw setlocal buftype=nofile bufhidden=delete
 
-"hi {{{
+autocmd FileType fuf NeoComplCacheLock
 
 """"""""""""""""""""""""""""""""""
 "            colors              "
 """"""""""""""""""""""""""""""""""
 hi Cursor	  guifg=bg	guibg=orange
-
-"}}}
-
-" map {{{
 
 """"""""""""""""""""""""""""""""""
 "             map                "
@@ -135,11 +146,11 @@ imap <C-f> <Right>
 imap <C-b> <Left>
 nnoremap <C-e> <End>
 nnoremap <C-a> <HOME>
+nnoremap <C-f> <Right>
+nnoremap <C-b> <Left>
 "map <C-e> :Tlist<CR>
 vmap <C-b> :Batch<CR>
-"}}}
 
-" neocomplcache {{{
 """"""""""""""""""""""""""""""""""
 "        neo complcache          "
 """"""""""""""""""""""""""""""""""
@@ -150,9 +161,10 @@ let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_snippets_dir='~/.vim/snippets'
 " dictionary
 let g:neocomplcache_dictionary_filetype_lists = {
-    \ 'objc' : $HOME . '/.vim/dict/objc.dict',
+    \ 'objc'       : $HOME . '/.vim/dict/objc.dict',
     \ 'javascript' : $HOME . '/.vim/dict/js.dict',
-    \ 'default' : $HOME . '/.vim/dict/default.dict'
+    \ 'ruby'       : $HOME . '/.vim/dict/ruby.dict',
+    \ 'default'    : $HOME . '/.vim/dict/default.dict'
 \ }
 " 日本語をキャッシュしない
 if !exists('g:neocomplcache_keyword_patterns')
@@ -165,9 +177,9 @@ let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 let g:neocomplcache_enable_auto_select = 1
 " 補完しないパターン
 let g:neocomplcache_disable_caching_buffer_name_pattern = '.*fuf.*|*.log'
-let g:neocomplcache_lock_buffer_name_pattern = '*.log'
+let g:neocomplcache_lock_buffer_name_pattern = '*.log|.*fuf.*'
 "入力に大文字が含まれている場合は、大文字・小文字を無視しない 
-let g:neocomplcache_enable_smart_case = 1
+"let g:neocomplcache_enable_smart_case = 0
 " 辞書読み込み
 noremap  <Space>d. :<C-u>NeoComplCacheCachingDictionary<Enter>
 " <TAB> completion.
@@ -187,7 +199,6 @@ inoremap <expr><C-c>  neocomplcache#cancel_popup()
 " 補完をアンドゥ
 inoremap <expr><C-u>  neocomplcache#undo_completion()
 
-
 inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
 "map <silent> <ESC> <ESC>:set iminsert=0<CR>
 " snippet 補完
@@ -195,9 +206,6 @@ imap <silent> <C-l> <Plug>(neocomplcache_snippets_expand)
 smap <silent> <C-l> <Plug>(neocomplcache_snippets_expand)
 command! -nargs=* Nes NeoComplCacheEditSnippets <args>
 
-"}}}
-
-" misc {{{
 
 """"""""""""""""""""""""""""""""""
 "             misc               "
@@ -209,7 +217,7 @@ let g:hatena_user = 'basyura'
 let g:vimwiki_list = [{'path':'~/dropbox/vimwiki/text/', 'path_html':'~/dropbox/vimwiki/html/'}]
 " mru.vim
 let MRU_Exclude_Files = '^/tmp/.*\|^/var/tmp/.*\|^/private/var\|COMMIT_EDITMSG'
-let MRU_Max_Entries   = 50
+let MRU_Max_Entries   = 100
 let MRU_Window_Height = 21
 let MRU_Add_Menu = 0
 " taglist
@@ -246,9 +254,8 @@ map <silent> <Leader>r :<C-u>R<CR>
 " Change current directory.
 nnoremap <silent> <Space>cd :<C-u>CD<CR>
 
-"}}}
 
-"fuf {{{
+"fuf
 "let g:fuf_keyOpen = ":"
 map <silent> <C-n> :FufBuffer<CR>
 map <silent> <Leader>d :<C-u>CD<CR>:FufFile<CR>
@@ -257,24 +264,16 @@ map <Leader>f :FufFile **/
 map <C-r> :FufMruFile<CR>
 map <Leader>b :FufBookmark<CR>
 let g:fuf_modesDisable = ['mrucmd']
-let g:fuf_maxMenuWidth = 100
+let g:fuf_maxMenuWidth = 90
 let g:fuf_mrufile_exclude = '\v\~$|\.bak$|\.swp|/private/var/*|/private/tmp/*|COMMIT_EDITMSG|Downloads/*|\.DS_Store'
 "map <silent> <C-f> <C-n><C-e>
 "let g:fuf_mrufile_maxItem = 10000
 "let g:fuf_enumeratingLimit = 20
 
-"}}}
 
 
-"neoui
-"map <silent> <C-n> :NeoUI buffer<CR>
-"map <silent> <Leader>d :NeoUI file<CR>
-"map <C-r> :NeoUI file/mru<CR>
-"let g:neoui_file_mru_time_format="%H:%M"
-"
 
-" twitvim {{{
-
+" twitvim
 nnoremap <Space>po   :<C-u>PosttoTwitter<Enter>
 nnoremap <Space>fr   :<C-u>FriendsTwitter<Enter>
 nnoremap <Space>re   :<C-u>RepliesTwitter<Enter>
@@ -283,25 +282,12 @@ nnoremap <Space>nn   :<C-u>NextTwitter<Enter>
 nnoremap <Leader>u   yw:UserTwitter <C-R>+<CR>
 
 let twitvim_browser_cmd = "open -a firefox "
-"let twitvim_enable_ruby = 1
-"let twitvim_enable_perl = 1
 let twitvim_enable_python = 1
 
-"}}}
-
-let g:rsenseHome = '/Users/tatsuya/opt/rsense-0.2'
-let g:rsenseUseOmniFunc = 1
-
-"let g:NeoComplCache_EnableSkipCompletion = 0
-"if !exists('g:NeoComplCache_OmniPatterns')
-"  let g:NeoComplCache_OmniPatterns = {}
-"endif
-"let g:NeoComplCache_OmniPatterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 
 
 silent! nmap <Leader>q :QuickRun<CR>
 
-autocmd FileType fuf NeoComplCacheLock
 
 nnoremap <Space>full :call FullScreen()<Enter>
 function! FullScreen()
@@ -310,17 +296,17 @@ function! FullScreen()
 endfunction
 
 
-"Command-line window {{{
+"Command-line window
 
-"set cmdwinheight=1
+set cmdwinheight=1
 "nnoremap <sid>(command-line-enter) q:
 "xnoremap <sid>(command-line-enter) q:
 "nnoremap <sid>(command-line-norange) q:<C-u>
 "nmap :  <sid>(command-line-enter)
 "xmap :  <sid>(command-line-enter)
 "autocmd CmdwinEnter * :NeoComplCacheLock
-"autocmd CmdwinEnter * call s:init_cmdwin()
-"function! s:init_cmdwin()
+autocmd CmdwinEnter * call s:init_cmdwin()
+function! s:init_cmdwin()
 "  nnoremap <buffer> q bw
 "  inoremap <buffer> q bw
 "  inoremap <buffer> wq WQ
@@ -330,31 +316,30 @@ endfunction
 "  "inoreabbrev q!  'bd!'
 "  "inoreabbrev wq  'WQ'
 "
-"  nnoremap <buffer> <Esc> :<C-u><C-c><C-h>
+  nnoremap <buffer> <Esc> :<C-u><C-c><C-h>
 "  inoremap <buffer> <C-c> :<ESC>
-"  inoremap <buffer> <ESC> :<C-u><C-c><C-h>
-"  nnoremap <buffer> <TAB> :<C-u>quit<CR>
-"  inoremap <buffer><expr><CR>  pumvisible() ? "\<C-y>" : "\<CR>"
+  inoremap <buffer> <ESC> :<C-u><C-c><C-h>
+  nnoremap <buffer> <TAB> :<C-u>quit<CR>
+  inoremap <buffer><expr><CR>  pumvisible() ? "\<C-y>" : "\<CR>"
 "  "inoremap <buffer><expr><C-h> pumvisible() ? "\<C-y>\<C-h>" : "\<C-h>"
 "  "inoremap <buffer><expr><BS>  pumvisible() ? "\<C-y>\<C-h>" : "\<C-h>"
 "
 "  " Completion.
 "  "inoremap <buffer><expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-"  inoremap <buffer><expr><TAB>  "\<C-n>"
+  inoremap <buffer><expr><TAB>  "\<C-n>"
 "  " カーソル移動
 "  inoremap <C-k> <Up>
 "  inoremap <C-j> <Down>
 "
-"  startinsert!
-"endfunction
+  startinsert!
+endfunction
 ""autocmd CmdwinLeave * call s:leave_cmdwin()
 ""function! s:leave_cmdwin()
 ""  let g:neocomplcache_auto_completion_start_length = 2
 ""endfunction
 
-"}}}
 
-function! Scouter(file, ...) "{{{
+function! Scouter(file, ...) 
   let pat = '^\s*$\|^\s*"'
   let lines = readfile(a:file)
   if !a:0 || !a:1
@@ -366,9 +351,15 @@ command! -bar -bang -nargs=? -complete=file Scouter
 \        echo Scouter(empty(<q-args>) ? $MYVIMRC : expand(<q-args>), <bang>0)
 command! -bar -bang -nargs=? -complete=file GScouter
 \        echo Scouter(empty(<q-args>) ? $MYGVIMRC : expand(<q-args>), <bang>0)
-"}}}
 
 let g:restart_vim_progname = "MacVim"
 
+
+
+command! MoveLeft call s:MoveLeft()
+function! s:MoveLeft()
+  winpos 0 0
+  set lines=43
+endfunction
 
 " vim: foldmethod=marker
