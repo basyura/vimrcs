@@ -287,6 +287,10 @@ let twitvim_enable_python = 1
 
 
 silent! nmap <Leader>q :QuickRun<CR>
+let g:quickrun_config = {
+      \ '*' : {'into' : 1},
+      \}
+
 
 
 nnoremap <Space>full :call FullScreen()<Enter>
